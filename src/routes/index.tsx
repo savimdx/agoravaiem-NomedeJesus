@@ -547,7 +547,12 @@ function Index() {
         <div className="mt-5">
           <Cta href={CHECKOUT_URL}>QUERO MEMORIZAR POR R$10,00</Cta>
         </div>
-        <p className="mt-8 text-xs opacity-60">Dúvidas ou suporte: contato@bibliamemorizada.site</p>
+        <p className="mt-8 text-xs opacity-60">
+          Dúvidas ou suporte:{" "}
+          <a href="mailto:contato@metodobibliamemorizada.site" className="hover:underline">
+            contato@metodobibliamemorizada.site
+          </a>
+        </p>
         <p className="mt-1 text-xs opacity-60">
           © 2026 Bíblia Memorizada. Todos os direitos reservados.
         </p>
