@@ -149,7 +149,15 @@
 
 @layer base {
   html {
+    font-size: 18px;
     scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  @media (min-width: 768px) {
+    html {
+      font-size: 19px;
+    }
   }
 
   * {
@@ -159,6 +167,8 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+    font-size: 1rem;
+    line-height: 1.6;
   }
 }
 

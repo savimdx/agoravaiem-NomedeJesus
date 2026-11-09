@@ -147,7 +147,7 @@ function Cta({
       href={href ?? "#"}
       onClick={onClick}
       suppressHydrationWarning
-      className="inline-block w-full max-w-md cursor-pointer rounded-lg bg-emerald-600 px-6 py-4 text-center text-sm font-extrabold uppercase text-white shadow-lg shadow-emerald-600/30 transition hover:bg-emerald-500 hover:brightness-105 active:scale-[0.99]"
+      className="inline-block w-full max-w-md cursor-pointer rounded-xl bg-emerald-600 px-7 py-4 text-center text-base sm:text-lg font-extrabold uppercase text-white shadow-lg shadow-emerald-600/30 transition hover:bg-emerald-500 hover:brightness-105 active:scale-[0.99]"
     >
       {children}
     </a>
@@ -215,22 +215,22 @@ function Index() {
     <div suppressHydrationWarning className="min-h-screen bg-background text-foreground">
       <div
         suppressHydrationWarning
-        className="sticky top-0 z-50 bg-destructive py-2 text-center text-xs font-bold uppercase text-destructive-foreground shadow-sm"
+        className="sticky top-0 z-50 bg-destructive px-4 py-2.5 text-center text-sm sm:text-base font-bold uppercase text-destructive-foreground shadow-sm"
       >
-        <Zap className="mr-1 inline h-3.5 w-3.5" /> Oferta por tempo limitado — disponível apenas
-        hoje <span suppressHydrationWarning>{today ? `(${today})` : ""}</span>
+        <Zap className="mr-1.5 inline h-4 w-4" /> Oferta por tempo limitado — disponível apenas hoje{" "}
+        <span suppressHydrationWarning>{today ? `(${today})` : ""}</span>
       </div>
 
       {/* Hero */}
       <section className="bg-gradient-to-b from-background to-muted px-4 pb-14 pt-8 text-center">
-        <span className="inline-flex items-center gap-1 rounded-full bg-muted px-3 py-1 text-[11px] font-semibold uppercase text-primary">
-          <Lock className="h-3 w-3" /> Compra segura · 7 dias de garantia
+        <span className="inline-flex items-center gap-1.5 rounded-full bg-muted px-4 py-1.5 text-xs sm:text-sm font-semibold uppercase text-primary">
+          <Lock className="h-3.5 w-3.5" /> Compra segura · 7 dias de garantia
         </span>
-        <h1 className="mx-auto mt-4 max-w-2xl text-3xl font-bold leading-tight md:text-4xl">
+        <h1 className="mx-auto mt-4 max-w-2xl text-3xl font-extrabold leading-tight sm:text-4xl md:text-5xl">
           <span className="text-primary">Memorize a Bíblia inteira</span> estudando apenas 15
           minutos por dia
         </h1>
-        <p className="mt-3 text-sm text-muted-foreground">
+        <p className="mx-auto mt-3.5 max-w-xl text-base sm:text-lg text-muted-foreground">
           Memorize todos os 1.189 capítulos da Bíblia com o Método Bíblia Memorizada.
         </p>
         <div className="relative mx-auto mt-6 w-full max-w-md aspect-square overflow-hidden rounded-lg bg-muted/20 shadow-xl">
@@ -252,17 +252,20 @@ function Index() {
             className="h-full w-full object-cover rounded-lg"
           />
         </div>
-        <div className="mt-6 flex items-center justify-center gap-1 text-primary">
+        <div className="mt-6 flex items-center justify-center gap-1.5 text-primary">
           {[...Array(5)].map((_, i) => (
-            <Star key={i} className="h-4 w-4 fill-current" />
+            <Star key={i} className="h-5 w-5 fill-current" />
           ))}
-          <span className="ml-2 text-xs text-muted-foreground">
+          <span className="ml-2 text-sm sm:text-base text-muted-foreground">
             + de <b className="text-foreground">3.000 alunos</b> memorizando
           </span>
         </div>
         <div className="mx-auto mt-5 flex max-w-xl flex-wrap justify-center gap-x-5 gap-y-2">
           {tags.map((t) => (
-            <span key={t} className="text-[11px] font-medium uppercase text-muted-foreground">
+            <span
+              key={t}
+              className="text-xs sm:text-sm font-medium uppercase text-muted-foreground"
+            >
               ✦ {t}
             </span>
           ))}
@@ -270,12 +273,12 @@ function Index() {
       </section>
 
       {/* Veja o material */}
-      <section className="bg-secondary py-12 text-center text-secondary-foreground overflow-hidden">
+      <section className="bg-secondary py-14 text-center text-secondary-foreground overflow-hidden">
         <div className="px-4">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">
             Veja os Módulos do Método <span className="text-destructive">na Prática</span>
           </h2>
-          <p className="mx-auto mt-2 max-w-xl text-xs text-secondary-foreground/75 sm:text-sm">
+          <p className="mx-auto mt-2.5 max-w-xl text-sm sm:text-base text-secondary-foreground/85">
             Conheça os módulos estruturados passo a passo para a memorização da Palavra.
           </p>
         </div>
@@ -315,7 +318,7 @@ function Index() {
         </div>
 
         <div className="px-4">
-          <p className="mx-auto mt-8 max-w-2xl text-sm opacity-80">
+          <p className="mx-auto mt-8 max-w-2xl text-base sm:text-lg opacity-90 leading-relaxed">
             Imagine ser capaz de lembrar facilmente os versículos da Bíblia, pregar sem se prender a
             textos e citar versículos durante as pregações ou evangelismo sem precisar olhar na
             Bíblia.
@@ -324,12 +327,14 @@ function Index() {
       </section>
 
       {/* O que você recebe */}
-      <section className="px-4 py-12">
-        <h2 className="text-center text-2xl font-bold">O que você recebe</h2>
-        <ul className="mx-auto mt-6 grid max-w-xl gap-3 sm:grid-cols-2">
+      <section className="px-4 py-14">
+        <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold">
+          O que você recebe
+        </h2>
+        <ul className="mx-auto mt-8 grid max-w-xl gap-4 sm:grid-cols-2">
           {receive.map((r) => (
-            <li key={r} className="flex items-start gap-2 text-sm">
-              <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+            <li key={r} className="flex items-start gap-2.5 text-base sm:text-lg font-medium">
+              <Check className="mt-1 h-5 w-5 shrink-0 text-primary" />
               {r}
             </li>
           ))}
@@ -337,20 +342,20 @@ function Index() {
       </section>
 
       {/* Problema / Solução */}
-      <section className="bg-muted px-4 py-12">
-        <div className="mx-auto grid max-w-2xl gap-4 sm:grid-cols-2">
-          <div className="rounded-lg bg-card p-6 text-center shadow-sm">
-            <Ban className="mx-auto h-6 w-6 text-destructive" />
-            <p className="mt-2 font-bold">Problema</p>
-            <p className="mt-1 text-xs text-muted-foreground">
+      <section className="bg-muted px-4 py-14">
+        <div className="mx-auto grid max-w-2xl gap-5 sm:grid-cols-2">
+          <div className="rounded-xl bg-card p-6 text-center shadow-sm">
+            <Ban className="mx-auto h-8 w-8 text-destructive" />
+            <p className="mt-2.5 text-lg sm:text-xl font-bold">Problema</p>
+            <p className="mt-2 text-sm sm:text-base leading-relaxed text-muted-foreground">
               Você sonha em memorizar a Bíblia, mas não tem muito tempo disponível e esquece os
               versículos durante as ministrações.
             </p>
           </div>
-          <div className="rounded-lg bg-card p-6 text-center shadow-sm">
-            <CheckSquare className="mx-auto h-6 w-6 text-success" />
-            <p className="mt-2 font-bold">Solução</p>
-            <p className="mt-1 text-xs text-muted-foreground">
+          <div className="rounded-xl bg-card p-6 text-center shadow-sm">
+            <CheckSquare className="mx-auto h-8 w-8 text-success" />
+            <p className="mt-2.5 text-lg sm:text-xl font-bold">Solução</p>
+            <p className="mt-2 text-sm sm:text-base leading-relaxed text-muted-foreground">
               Técnicas avançadas de memorização baseadas em estudos científicos, com poucos minutos
               de estudo por dia.
             </p>
@@ -359,17 +364,17 @@ function Index() {
       </section>
 
       {/* Depoimentos */}
-      <section className="overflow-hidden py-12 text-center">
+      <section className="overflow-hidden py-14 text-center">
         <div className="px-4">
-          <h2 className="text-2xl font-bold">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">
             O que os alunos <span className="text-primary">dizem</span>
           </h2>
-          <div className="mt-2 flex justify-center gap-1 text-primary">
+          <div className="mt-2.5 flex justify-center gap-1.5 text-primary">
             {[...Array(5)].map((_, i) => (
-              <Star key={i} className="h-5 w-5 fill-current" />
+              <Star key={i} className="h-6 w-6 fill-current" />
             ))}
           </div>
-          <p className="mx-auto mt-2 max-w-xl text-xs text-muted-foreground sm:text-sm">
+          <p className="mx-auto mt-2 max-w-xl text-sm sm:text-base text-muted-foreground">
             Depoimentos reais enviados no nosso WhatsApp por quem já está aplicando o método.
           </p>
         </div>
@@ -415,12 +420,12 @@ function Index() {
       </section>
 
       {/* Oferta */}
-      <section id="oferta" className="px-4 py-12">
-        <div className="mx-auto max-w-md rounded-xl border-2 border-primary/50 bg-card p-6 text-center shadow-xl">
-          <span className="inline-block rounded-full bg-destructive px-3 py-1 text-[11px] font-bold uppercase text-destructive-foreground">
+      <section id="oferta" className="px-4 py-14">
+        <div className="mx-auto max-w-lg rounded-2xl border-2 border-primary/50 bg-card p-5 sm:p-7 text-center shadow-xl">
+          <span className="inline-block rounded-full bg-destructive px-4 py-1.5 text-xs sm:text-sm font-bold uppercase text-destructive-foreground">
             Última chance — oferta termina hoje
           </span>
-          <h2 className="mt-3 text-xl font-bold">Método Bíblia Memorizada</h2>
+          <h2 className="mt-3 text-2xl sm:text-3xl font-extrabold">Método Bíblia Memorizada</h2>
           <div className="relative mx-auto mt-4 w-full aspect-square overflow-hidden rounded-lg bg-muted/20">
             <img
               src={HERO_IMAGE}
@@ -440,19 +445,19 @@ function Index() {
             />
           </div>
           <div id="preco-card" className="scroll-mt-14">
-            <ul className="mt-4 space-y-2 text-left text-sm">
+            <ul className="mt-5 space-y-2.5 text-left text-base sm:text-lg font-medium">
               {[
                 "Treinamento completo de memorização",
                 "1.189 capítulos em 15 min/dia",
                 "Acesso vitalício · pagamento único",
               ].map((x) => (
-                <li key={x} className="flex gap-2">
-                  <Check className="h-4 w-4 text-primary" />
+                <li key={x} className="flex items-center gap-2.5">
+                  <Check className="h-5 w-5 shrink-0 text-primary" />
                   {x}
                 </li>
               ))}
             </ul>
-            <div className="mt-3 space-y-2 text-left text-xs sm:text-sm">
+            <div className="mt-4 space-y-2.5 text-left text-sm sm:text-base">
               {[
                 ["Bônus #1", "Guia de oratória básica"],
                 ["Bônus #2", "Como preparar uma mensagem impactante"],
@@ -460,31 +465,32 @@ function Index() {
               ].map(([a, b]) => (
                 <div
                   key={a}
-                  className="flex items-center gap-2 rounded-md bg-accent px-3 py-2 text-accent-foreground"
+                  className="flex items-center gap-2.5 rounded-lg bg-accent px-3.5 py-2.5 text-accent-foreground"
                 >
-                  <Gift className="h-4 w-4 shrink-0 text-primary" />
+                  <Gift className="h-5 w-5 shrink-0 text-primary" />
                   <span className="shrink-0 whitespace-nowrap font-bold">{a}</span>
                   <span className="shrink-0">—</span>
                   <span className="leading-tight">{b}</span>
                 </div>
               ))}
             </div>
-            <div className="mt-5">
-              <p className="text-sm font-semibold text-destructive line-through">de R$97,00</p>
-              <p className="my-1 text-6xl font-black tracking-tight text-primary sm:text-7xl">
-                R$ 10,00
+            <div className="mt-6">
+              <p className="text-base sm:text-lg font-semibold text-destructive line-through">
+                de R$97,00
               </p>
-              <p className="mt-1 text-xs font-medium text-muted-foreground">
+              <p className="my-2 whitespace-nowrap text-center text-[clamp(2.75rem,11.5vw,5.25rem)] font-black leading-none tracking-tight text-primary">
+                R$&nbsp;10,00
+              </p>
+              <p className="mt-1 text-sm font-medium text-muted-foreground">
                 Pagamento único · Acesso vitalício
               </p>
-              <span className="mt-2 inline-block rounded-full bg-muted px-3 py-1 text-xs font-semibold text-primary">
+              <span className="mt-2 inline-block rounded-full bg-muted px-4 py-1.5 text-sm font-bold text-primary">
                 Você economiza R$87,00
               </span>
-              <div className="mt-5">
+              <div className="mt-6">
                 <Cta href={CHECKOUT_URL}>EU QUERO ACESSAR O MÉTODO!</Cta>
               </div>
-              <p className="mt-3 text-xs text-muted-foreground">VISA · MasterCard · Elo · PIX</p>
-              <p className="mt-1 text-xs font-semibold text-destructive">
+              <p className="mt-2 text-xs sm:text-sm font-bold text-destructive">
                 ATENÇÃO: vagas com esse valor são LIMITADAS.
               </p>
             </div>
@@ -493,53 +499,54 @@ function Index() {
       </section>
 
       {/* Garantia */}
-      <section className="bg-muted px-4 py-12 text-center">
-        <ShieldCheck className="mx-auto h-10 w-10 rounded-full border border-destructive/40 p-2 text-destructive" />
-        <h2 className="mt-3 text-xl font-bold">Garantia de 7 dias</h2>
-        <p className="mx-auto mt-2 max-w-md text-sm text-muted-foreground">
+      <section className="bg-muted px-4 py-14 text-center">
+        <ShieldCheck className="mx-auto h-12 w-12 rounded-full border border-destructive/40 p-2.5 text-destructive" />
+        <h2 className="mt-3.5 text-2xl sm:text-3xl font-extrabold">Garantia de 7 dias</h2>
+        <p className="mx-auto mt-2.5 max-w-md text-base sm:text-lg leading-relaxed text-muted-foreground">
           Se por algum motivo você achar que o treinamento não é pra você, basta mandar um único
           e-mail que devolvemos o seu dinheiro. Risco zero!
         </p>
       </section>
 
       {/* FAQ */}
-      <section className="mx-auto max-w-xl px-4 py-12">
-        <h2 className="text-center text-2xl font-bold">Perguntas Frequentes</h2>
-        <div className="mt-6 divide-y">
+      <section className="mx-auto max-w-2xl px-4 py-14">
+        <h2 className="text-center text-2xl sm:text-3xl md:text-4xl font-extrabold">
+          Perguntas Frequentes
+        </h2>
+        <div className="mt-8 divide-y">
           {faq.map(([q, a], i) => (
             <div key={q}>
               <button
                 onClick={() => setOpen(open === i ? null : i)}
-                className="flex w-full items-center justify-between gap-4 py-4 text-left text-sm font-bold"
+                className="flex w-full items-center justify-between gap-4 py-4 text-left text-base sm:text-lg font-bold"
               >
                 {q}
                 <span className="rounded-full bg-secondary p-1 text-secondary-foreground">
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition ${open === i ? "rotate-180" : ""}`}
-                  />
+                  <ChevronDown className={`h-4 w-4 transition ${open === i ? "rotate-180" : ""}`} />
                 </span>
               </button>
-              {open === i && <p className="pb-4 text-sm text-muted-foreground">{a}</p>}
+              {open === i && (
+                <p className="pb-4 text-sm sm:text-base leading-relaxed text-muted-foreground">
+                  {a}
+                </p>
+              )}
             </div>
           ))}
         </div>
       </section>
 
       {/* CTA final */}
-      <section className="bg-secondary px-4 py-12 text-center text-secondary-foreground">
-        <h2 className="text-2xl font-bold">
+      <section className="bg-secondary px-4 py-14 text-center text-secondary-foreground">
+        <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold">
           Comece a memorizar a Bíblia <span className="text-primary">hoje</span>
         </h2>
-        <div className="mt-5">
+        <div className="mt-6">
           <Cta href={CHECKOUT_URL}>QUERO MEMORIZAR POR R$10,00</Cta>
         </div>
-        <p className="mt-8 text-xs opacity-60">
-          Dúvidas ou suporte:{" "}
-          <a href="mailto:contato@metodobibliamemorizada.site" className="hover:underline">
-            contato@metodobibliamemorizada.site
-          </a>
+        <p className="mt-8 text-sm opacity-70">
+          Dúvidas ou suporte: <span className="underline">contato@metodobibliamemorizada.site</span>
         </p>
-        <p className="mt-1 text-xs opacity-60">
+        <p className="mt-1.5 text-xs sm:text-sm opacity-70">
           © 2026 Bíblia Memorizada. Todos os direitos reservados.
         </p>
       </section>
