@@ -1,16 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import {
-  Check,
-  Zap,
-  Lock,
-  Gift,
-  ShieldCheck,
-  ChevronDown,
-  Star,
-  Ban,
-  CheckSquare,
-} from "lucide-react";
+import { Check, Lock, Gift, ShieldCheck, ChevronDown, Star, Ban, CheckSquare } from "lucide-react";
 
 const HERO_IMAGE = "/assets/images/hero.png";
 const HERO_FALLBACK = "https://i.ibb.co/gb6MK00g/B-blia-Memorizada-M-todo-Exclusivo.png";
@@ -197,11 +187,9 @@ const faq = [
 
 function Index() {
   const [open, setOpen] = useState<number | null>(null);
-  const [today, setToday] = useState("");
+  const [timeLeft, setTimeLeft] = useState(15 * 60);
 
   useEffect(() => {
-    setToday(new Date().toLocaleDateString("pt-BR"));
-
     // Precarrega todas as imagens imediatamente no navegador do lead
     if (typeof window !== "undefined") {
       ALL_PRELOAD_IMAGES.forEach((src) => {
@@ -209,16 +197,63 @@ function Index() {
         img.src = src;
       });
     }
+
+    // Temporizador de 15 minutos persistido no sessionStorage
+    const STORAGE_KEY = "oferta_timer_15m";
+    const now = Date.now();
+    let target = 0;
+    try {
+      const stored = sessionStorage.getItem(STORAGE_KEY);
+      if (stored) target = Number(stored);
+    } catch (e) {
+      console.warn("Storage not accessible", e);
+    }
+
+    if (!target || target <= now) {
+      target = now + 15 * 60 * 1000;
+      try {
+        sessionStorage.setItem(STORAGE_KEY, target.toString());
+      } catch (e) {
+        console.warn("Storage not accessible", e);
+      }
+    }
+
+    const updateTimer = () => {
+      const remaining = Math.max(0, Math.floor((target - Date.now()) / 1000));
+      setTimeLeft(remaining);
+      if (remaining <= 0) {
+        const newTarget = Date.now() + 15 * 60 * 1000;
+        try {
+          sessionStorage.setItem(STORAGE_KEY, newTarget.toString());
+        } catch (e) {
+          console.warn("Storage not accessible", e);
+        }
+        setTimeLeft(15 * 60);
+      }
+    };
+
+    updateTimer();
+    const interval = setInterval(updateTimer, 1000);
+    return () => clearInterval(interval);
   }, []);
+
+  const minutes = String(Math.floor(timeLeft / 60)).padStart(2, "0");
+  const seconds = String(timeLeft % 60).padStart(2, "0");
 
   return (
     <div suppressHydrationWarning className="min-h-screen bg-background text-foreground">
       <div
         suppressHydrationWarning
-        className="sticky top-0 z-50 bg-destructive px-4 py-2.5 text-center text-sm sm:text-base font-bold uppercase text-destructive-foreground shadow-sm"
+        className="sticky top-0 z-50 flex items-center justify-center gap-2 whitespace-nowrap bg-destructive px-3 py-2.5 text-center text-xs font-black uppercase tracking-wide text-destructive-foreground shadow-sm sm:text-sm md:text-base"
       >
-        <Zap className="mr-1.5 inline h-4 w-4" /> Oferta por tempo limitado — disponível apenas hoje{" "}
-        <span suppressHydrationWarning>{today ? `(${today})` : ""}</span>
+        <span>OFERTA POR TEMPO LIMITADO</span>
+        <span className="opacity-75">—</span>
+        <span
+          suppressHydrationWarning
+          className="inline-flex items-center rounded bg-black/25 px-2 py-0.5 font-mono text-xs font-black tracking-widest text-white sm:text-sm"
+        >
+          {minutes}:{seconds}
+        </span>
       </div>
 
       {/* Hero */}
@@ -252,12 +287,14 @@ function Index() {
             className="h-full w-full object-cover rounded-lg"
           />
         </div>
-        <div className="mt-6 flex items-center justify-center gap-1.5 text-primary">
-          {[...Array(5)].map((_, i) => (
-            <Star key={i} className="h-5 w-5 fill-current" />
-          ))}
-          <span className="ml-2 text-sm sm:text-base text-muted-foreground">
-            + de <b className="text-foreground">3.000 alunos</b> memorizando
+        <div className="mt-6 flex flex-col items-center justify-center gap-1.5">
+          <div className="flex items-center justify-center gap-1 text-primary">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="h-5 w-5 fill-current" />
+            ))}
+          </div>
+          <span className="text-sm sm:text-base text-muted-foreground">
+            + de <b className="text-foreground">3000 alunos</b> memorizando
           </span>
         </div>
         <div className="mx-auto mt-5 flex max-w-xl flex-wrap justify-center gap-x-5 gap-y-2">
