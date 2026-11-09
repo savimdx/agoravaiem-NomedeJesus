@@ -211,14 +211,6 @@ function Index() {
     }
   }, []);
 
-  const scrollToPrice = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    const target = document.getElementById("preco-card");
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth", block: "start" });
-    }
-  };
-
   return (
     <div suppressHydrationWarning className="min-h-screen bg-background text-foreground">
       <div
@@ -260,13 +252,7 @@ function Index() {
             className="h-full w-full object-cover rounded-lg"
           />
         </div>
-        <div className="mt-6">
-          <Cta onClick={scrollToPrice}>QUERO MEMORIZAR A BÍBLIA</Cta>
-        </div>
-        <p className="mt-2 text-xs text-muted-foreground">
-          <Check className="inline h-3 w-3 text-primary" /> Acesso imediato após o pagamento
-        </p>
-        <div className="mt-3 flex items-center justify-center gap-1 text-primary">
+        <div className="mt-6 flex items-center justify-center gap-1 text-primary">
           {[...Array(5)].map((_, i) => (
             <Star key={i} className="h-4 w-4 fill-current" />
           ))}
