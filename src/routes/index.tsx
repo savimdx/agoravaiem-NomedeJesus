@@ -198,42 +198,52 @@ function Index() {
       });
     }
 
-    // Temporizador de 15 minutos persistido no sessionStorage
-    const STORAGE_KEY = "oferta_timer_15m";
-    const now = Date.now();
-    let target = 0;
+    // Temporizador de 15 minutos robusto para mobile e desktop
+    const DURATION = 15 * 60; // 15 minutos em segundos
+    const STORAGE_KEY = "oferta_timer_end_v4";
+    const nowSec = Math.floor(Date.now() / 1000);
+
+    let endSec = 0;
     try {
-      const stored = sessionStorage.getItem(STORAGE_KEY);
-      if (stored) target = Number(stored);
-    } catch (e) {
-      console.warn("Storage not accessible", e);
-    }
-
-    if (!target || target <= now) {
-      target = now + 15 * 60 * 1000;
-      try {
-        sessionStorage.setItem(STORAGE_KEY, target.toString());
-      } catch (e) {
-        console.warn("Storage not accessible", e);
-      }
-    }
-
-    const updateTimer = () => {
-      const remaining = Math.max(0, Math.floor((target - Date.now()) / 1000));
-      setTimeLeft(remaining);
-      if (remaining <= 0) {
-        const newTarget = Date.now() + 15 * 60 * 1000;
-        try {
-          sessionStorage.setItem(STORAGE_KEY, newTarget.toString());
-        } catch (e) {
-          console.warn("Storage not accessible", e);
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        const parsed = parseInt(stored, 10);
+        if (!isNaN(parsed) && parsed > nowSec && parsed <= nowSec + DURATION) {
+          endSec = parsed;
         }
-        setTimeLeft(15 * 60);
       }
+    } catch {
+      // storage not accessible
+    }
+
+    if (!endSec) {
+      endSec = nowSec + DURATION;
+      try {
+        localStorage.setItem(STORAGE_KEY, String(endSec));
+      } catch {
+        // storage not accessible
+      }
+    }
+
+    const tick = () => {
+      const current = Math.floor(Date.now() / 1000);
+      let diff = endSec - current;
+
+      if (diff <= 0) {
+        endSec = current + DURATION;
+        try {
+          localStorage.setItem(STORAGE_KEY, String(endSec));
+        } catch {
+          // storage not accessible
+        }
+        diff = DURATION;
+      }
+
+      setTimeLeft(diff);
     };
 
-    updateTimer();
-    const interval = setInterval(updateTimer, 1000);
+    tick();
+    const interval = setInterval(tick, 1000);
     return () => clearInterval(interval);
   }, []);
 
@@ -241,17 +251,11 @@ function Index() {
   const seconds = String(timeLeft % 60).padStart(2, "0");
 
   return (
-    <div suppressHydrationWarning className="min-h-screen bg-background text-foreground">
-      <div
-        suppressHydrationWarning
-        className="sticky top-0 z-50 flex items-center justify-center gap-2 whitespace-nowrap bg-destructive px-3 py-2.5 text-center text-xs font-black uppercase tracking-wide text-destructive-foreground shadow-sm sm:text-sm md:text-base"
-      >
+    <div className="min-h-screen bg-background text-foreground">
+      <div className="sticky top-0 z-50 flex items-center justify-center gap-2 whitespace-nowrap bg-destructive px-3 py-2.5 text-center text-xs font-black uppercase tracking-wide text-destructive-foreground shadow-sm sm:text-sm md:text-base">
         <span>OFERTA POR TEMPO LIMITADO</span>
         <span className="opacity-75">—</span>
-        <span
-          suppressHydrationWarning
-          className="inline-flex items-center rounded bg-black/25 px-2 py-0.5 font-mono text-xs font-black tracking-widest text-white sm:text-sm"
-        >
+        <span className="inline-flex items-center rounded bg-black/25 px-2 py-0.5 font-mono text-xs font-black tracking-widest text-white sm:text-sm">
           {minutes}:{seconds}
         </span>
       </div>

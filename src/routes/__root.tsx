@@ -116,36 +116,6 @@ function RootShell({ children }: { children: ReactNode }) {
     <html lang="pt-BR" suppressHydrationWarning>
       <head suppressHydrationWarning>
         <HeadContent />
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){
-              try {
-                var imgs = [
-                  '/assets/images/hero.png',
-                  '/assets/images/modulo-1.png',
-                  '/assets/images/modulo-2.png',
-                  '/assets/images/modulo-3.png',
-                  '/assets/images/modulo-4.png',
-                  '/assets/images/modulo-5.png',
-                  '/assets/images/modulo-6.png',
-                  '/assets/images/modulo-7.png',
-                  '/assets/images/modulo-8.png',
-                  '/assets/images/modulo-9.png',
-                  '/assets/images/modulo-10.png',
-                  '/assets/images/depoimento-1.png',
-                  '/assets/images/depoimento-2.png',
-                  '/assets/images/depoimento-3.png',
-                  '/assets/images/depoimento-4.png',
-                  '/assets/images/depoimento-5.png'
-                ];
-                for (var i = 0; i < imgs.length; i++) {
-                  var im = new Image();
-                  im.src = imgs[i];
-                }
-              } catch(e) {}
-            })();`,
-          }}
-        />
       </head>
       <body suppressHydrationWarning>
         {children}
